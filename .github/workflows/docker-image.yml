@@ -11,9 +11,21 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v3
+      - name: Checkout code
+        uses: actions/checkout@v3
 
       - name: Build the Docker image
-        run: docker build . --file Dockerfile --tag my-image-name:$(date +%s)
+        run: docker build . --file Dockerfile --tag my-image-name:latest
 
+  run-container:
+    runs-on: ubuntu-latest
 
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Run the Docker container
+        run: docker run -d --name youtube-player my-image-name:latest
+
+      - name: Wait for the container to initialize
+        run: sleep 10  # Adjust the sleep time based on your application's initialization time
