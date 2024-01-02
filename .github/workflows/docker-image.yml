@@ -21,6 +21,7 @@ jobs:
         run: docker images
 
   run-container:
+    needs: build  # Make sure 'run-container' runs only if 'build' is successful
     runs-on: ubuntu-latest
 
     steps:
