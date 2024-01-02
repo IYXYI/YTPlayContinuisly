@@ -12,8 +12,10 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
+      - name: Mount local directory
+        run: mkdir -p /build && sudo mount -t drvfs /path/to/build /build
       - name: Build the Docker image
-        run: docker build -t my-image-name:$(date +%s) /path/to/build/Dockerfile
+        run: docker build -t my-image-name:$(date +%s) /build/Dockerfile
 
   run-container:
     runs-on: ubuntu-latest
