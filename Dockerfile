@@ -1,7 +1,9 @@
-FROM ubuntu:latest
+FROM python:3.10
 
-RUN apt-get update && apt-get install -y mpv
+RUN pip install pytube
 
-COPY youtube-video.url /home/youtube-video.url
+COPY main.py .
 
-CMD ["mpv", "-loop", "0", "/home/youtube-video.url"]
+COPY youtube-video.url .
+
+CMD ["python", "main.py"]
