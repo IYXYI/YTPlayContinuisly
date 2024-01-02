@@ -1,7 +1,9 @@
 import pytube
 import os
 
-video_url = os.environ["YOUTUBE_VIDEO_URL"]
+with open("youtube-video.url") as f:
+    video_url = f.read()
+
 yt = pytube.YouTube(video_url)
 video = yt.streams.first()
 video.player.play()
