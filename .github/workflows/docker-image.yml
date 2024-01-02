@@ -1,18 +1,24 @@
+
 name: Docker Image CI
 
 on:
-  push:
-    branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
+   schedule:
+       # Run the workflow every 2 minutes
+       cron: "*/2 * * * *"
 
 jobs:
+    build:
+        runs-on: ubuntu-latest
 
-  build:
+        steps:
+            - name: Checkout repository
+                uses: actions/checkout@v3
 
-    runs-on: ubuntu-latest
+            - name: Build container
+                run: docker build -t youtube-player .
 
-    steps:
-    - uses: actions/checkout@v3
-    - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag my-image-name:$(date +%s)
+            - name: Run container
+                run: docker run -d --name youtube-player youtube-player
+
+
+
