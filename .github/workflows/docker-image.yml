@@ -17,12 +17,18 @@ jobs:
       - name: Build the Docker image
         run: docker build . --file Dockerfile --tag my-image-name:latest
 
+      - name: Print Docker Images
+        run: docker images
+
   run-container:
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
+
+      - name: Print Docker Images
+        run: docker images
 
       - name: Run the Docker container
         run: docker run -d --name youtube-player my-image-name:latest
