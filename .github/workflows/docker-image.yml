@@ -13,7 +13,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: Build the Docker image
-        run: docker build -t my-image-name:$(date +%s) ./Dockerfile
+        run: docker build -t my-image-name:$(date +%s) /path/to/build/Dockerfile
 
   run-container:
     runs-on: ubuntu-latest
