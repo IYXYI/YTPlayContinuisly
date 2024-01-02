@@ -28,4 +28,4 @@ jobs:
         run: docker run -d --name youtube-player my-image-name:latest
 
       - name: Wait for the container to initialize
-        run: sleep 10  # Adjust the sleep time based on your application's initialization time
+        run: sleep 30  # Adjust the sleep time based on your application's initialization time
