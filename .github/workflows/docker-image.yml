@@ -22,6 +22,7 @@ jobs:
         run: test -d /build
 
       - name: Mount local directory
+        if: always() # Always run this step, even if the directory doesn't exist
         run: sudo mount -t ntfs /path/to/build /build
 
       - name: Build the Docker image
