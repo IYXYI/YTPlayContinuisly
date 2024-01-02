@@ -15,7 +15,7 @@ jobs:
       - name: Create build directory
         run: sudo mkdir -p /build
       - name: Mount local directory
-        run: sudo mount -t drvfs /path/to/build /build
+        run: sudo mount -t ntfs /path/to/build /build
       - name: Build the Docker image
         run: docker build -t my-image-name:$(date +%s) /build/Dockerfile
 
