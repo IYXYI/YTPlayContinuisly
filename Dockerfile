@@ -1,9 +1,7 @@
-FROM python:3.10
+FROM python:3.8
 
-RUN pip install pytube
+WORKDIR /app
 
-COPY main.py .
-
-COPY youtube-video.url .
+COPY . .
 
 CMD ["python", "main.py"]
