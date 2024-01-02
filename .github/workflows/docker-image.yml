@@ -12,10 +12,18 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
+
       - name: Create build directory
+        if: not fileExists("/path/to/build")
         run: sudo mkdir -p /build
+
+      - name: Check build directory exists
+        if: not fileExists("/path/to/build")
+        run: test -d /build
+
       - name: Mount local directory
         run: sudo mount -t ntfs /path/to/build /build
+
       - name: Build the Docker image
         run: docker build -t my-image-name:$(date +%s) /build/Dockerfile
 
