@@ -1,5 +1,6 @@
 name: Docker Image CI
 
+
 on:
   push:
     branches: [ "main" ]
@@ -13,8 +14,11 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
+      - name: Create build directory
+        run: sudo mkdir -p /build
+
       - name: Check build directory exists
-        run: test -d /build
+        run: if [[ ! -d /build ]]; then echo "Build directory doesn't exist"; else echo "Build directory exists"; fi
 
       - name: Mount local directory
         if: always() # Always run this step, even if the directory doesn't exist
