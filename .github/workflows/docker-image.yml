@@ -1,6 +1,5 @@
 name: Docker Image CI
 
-
 on:
   push:
     branches: [ "main" ]
@@ -8,29 +7,11 @@ on:
     branches: [ "main" ]
 
 jobs:
-  build:
+  run-container:
     runs-on: ubuntu-latest
 
     steps:
       - uses: actions/checkout@v3
 
-      - name: Create build directory
-        run: sudo mkdir -p /build
-
-      - name: Check build directory exists
-        run: if [[ ! -d /build ]]; then echo "Build directory doesn't exist"; else echo "Build directory exists"; fi
-
-      - name: Mount local directory
-        if: always() # Always run this step, even if the directory doesn't exist
-        run: sudo mount -t ntfs /path/to/build /build
-
-      - name: Build the Docker image
-        run: docker build -t my-image-name:$(date +%s) /build/Dockerfile
-
-  run-container:
-    runs-on: ubuntu-latest
-    needs: build
-
-    steps:
       - name: Run the Docker container
-        run: docker run -d --name youtube-player my-image-name:$(date +%s)
+        run: docker run -d --name youtube-player my-image-name
